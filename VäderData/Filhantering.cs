@@ -36,8 +36,6 @@ namespace VäderData
             return null;
         }
 
-
-
         public static void CreateFile()
         {
             File.Create("LoggFile.txt").Dispose();
@@ -59,8 +57,8 @@ namespace VäderData
                 var dailyAverages3 = Filhantering.GetDataAverage("Ute");
                 var regex = new Regex(@"^2016-0[8-9]|2016-1[0-2]");
                 var atumDays = dailyAverages3.Where(d => regex.IsMatch(d.Date)).ToList();
-                sw.WriteLine($"Datum för meterologisk Höst: {Program.DaysInARow(10, atumDays)} ");
-                sw.WriteLine($"Datum för meterologisk Vinter: {Program.DaysInARow(0, Filhantering.GetDataAverage("Ute"))} ");
+                sw.WriteLine($"Datum för meterologisk Höst: {WeatherService.DaysInARow(10, atumDays)} ");
+                sw.WriteLine($"Datum för meterologisk Vinter: {WeatherService.DaysInARow(0, Filhantering.GetDataAverage("Ute"))} ");
 
                 sw.WriteLine("((luftfuktighet -78) * (Temp/15))/0,22");
             }
