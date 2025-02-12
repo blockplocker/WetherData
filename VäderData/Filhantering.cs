@@ -13,7 +13,7 @@ namespace VäderData
     {
         public static List<(string Date, double AvgTemp, double AvgHumidity, double MoldRisk)> GetDataAverage(string Choice, int DayOrMonth = 1)
         {
-            string text = File.ReadAllText("tempdata5-med fel.txt");
+            string text = File.ReadAllText(@"..\..\..\..\tempdata5-med fel.txt");
             string pattern = @"2016-(?<Month>[0-1][0-26-9])-(?<Day>[0-2][0-9]|[3][0-1]) (?<Time>[0-2]\d:[0-5]\d:[0-5]\d),(?<State>Inne|Ute),(?<Temp>[0-3][0-9]\.[0-9]|[0-9]\.[0-9]|-[0-9]\.[0-9]),(?<humidity>\d{1,3})";
 
             Regex regex1 = new Regex(pattern);
