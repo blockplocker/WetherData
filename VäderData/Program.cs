@@ -11,13 +11,24 @@ namespace VäderData
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine(" 1: medel tempratur och luftfucktighet för vald dag. " +
-                    "\n 2: Varmaste till kallaste dagen " +
-                    "\n 3: torraste till fuktigaste dagen " +
-                    "\n 4: Meterologisk höst " +
-                    "\n 5: Meterologisk Vinter " +
-                    "\n 6: Mögelrisk " +
-                    "\n 7: Skapa logg fil");
+                //Console.WriteLine(" 1: medel tempratur och luftfucktighet för vald dag. " +
+                //    "\n 2: Varmaste till kallaste dagen " +
+                //    "\n 3: torraste till fuktigaste dagen " +
+                //    "\n 4: Meterologisk höst " +
+                //    "\n 5: Meterologisk Vinter " +
+                //    "\n 6: Mögelrisk " +
+                //    "\n 7: Skapa logg fil");
+                List<string> list = new List<string>()
+                {
+                    " medel tempratur och luftfucktighet för vald dag. ",
+                    " Varmaste till kallaste dagen ",
+                    " torraste till fuktigaste dagen ",
+                    " Meterologisk höst ",
+                    " Meterologisk Vinter ",
+                    " Mögelrisk ",
+                    " Skapa logg fil"
+                };
+                list.NumberedList();
 
 
                 string choice = Console.ReadLine();
