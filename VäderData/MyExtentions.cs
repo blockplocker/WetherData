@@ -8,16 +8,11 @@ namespace VäderData
 {
     internal static class MyExtentions
     {
-        public static void ChangeColor(this string text, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ResetColor();
-        }
         public static void Cw(this string str)
         {
             Console.WriteLine(str);
         }
+        
         public static void NumberedList<T>(this List<T> items)
         {
             for (int i = 1; i <= items.Count; i++)

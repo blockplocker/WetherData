@@ -20,7 +20,7 @@ namespace VäderData
             MatchCollection matches = regex1.Matches(text);
 
 
-            var dailyAveragesInne = matches.Cast<Match>()
+            var dailyAverages = matches.Cast<Match>()
             .Where(m => m.Groups["State"].Value == (Choice == "Inne" ? "Inne" : Choice == "Ute" ? "Ute" : ""))// Ternary operator to choose inne or ute
             .GroupBy(m => $"{m.Groups["Month"].Value}{(DayOrMonth == 1 ? "-" + m.Groups["Day"].Value : "")}") // Ternary operator to choose day or month
             .Select(g => (
@@ -28,14 +28,12 @@ namespace VäderData
                 Date: $"2016-{g.Key}",
                 AvgTemp: g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)),
                 AvgHumidity: g.Average(m => int.Parse(m.Groups["humidity"].Value)),
-                //MoldRisk: (g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) > 50 | g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) < 0 | g.Average(m => int.Parse(m.Groups["humidity"].Value)) < 80 ? 0 : (g.Average(m => int.Parse(m.Groups["humidity"].Value)) - 80) * (5 - (g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) / 10)) )
-                // (humidity - 80) * ((5 - Temp) / 10))
                 MoldRisk: (g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) > 50 | g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) < 0 | g.Average(m => int.Parse(m.Groups["humidity"].Value)) < 80 ? 0 : (g.Average(m => int.Parse(m.Groups["humidity"].Value)) - 78) * (g.Average(m => double.Parse(m.Groups["Temp"].Value, CultureInfo.InvariantCulture)) / 15) / 0.22)
-                // ((humidity - 78) * (Temp / 15)) / 0.22
+                // ((humidity - 78) * (Temp / 15)) / 0.22 
+                // (humidity - 80) * ((Temp) / 10))  
                 ))
             .ToList();
-            return dailyAveragesInne;
-            return null;
+            return dailyAverages;
         }
 
         public static void CreateFile()

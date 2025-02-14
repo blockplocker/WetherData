@@ -8,11 +8,15 @@ namespace VäderData
 {
     internal class WeatherService
     {
+        private static MyDelegates.MyDelegate InnOROutDel = InOrOut;
+
+        public static int InOrOut()
+        {
+            Console.WriteLine("1 Inne eller 2 Ute: ");
+            return Helpers.GetValidIntegerMinMax(1, 2);
+        }
         public static void SearchDay()
         {
-
-            Console.WriteLine("1 Inne eller 2 Ute: ");
-            int inOrOut = Helpers.GetValidIntegerMinMax(1, 2);
             Console.Write("Månad: ");
             int validInteger = Helpers.GetValidIntegerMinMax(6, 12);
             string month = (validInteger > 9 ? "" + validInteger : "0" + validInteger);
@@ -21,7 +25,7 @@ namespace VäderData
             string day1 = (validInteger1 > 9 ? "" + validInteger1 : "0" + validInteger1);
 
             string Date = $"2016-{month}-{day1}";
-            var dailyAverages = Filhantering.GetDataAverage(inOrOut == 1 ? "Inne" : "Ute");
+            var dailyAverages = Filhantering.GetDataAverage(InnOROutDel() == 1 ? "Inne" : "Ute");
             var filteredData = dailyAverages.Where(m => m.Date == Date).ToList();
             if (filteredData.Count == 0)
             {
@@ -35,9 +39,7 @@ namespace VäderData
 
         public static void HottestDay()
         {
-            Console.WriteLine("1 Inne eller 2 Ute: ");
-            int inOrOut2 = Helpers.GetValidIntegerMinMax(1, 2);
-            var dailyAverages1 = Filhantering.GetDataAverage(inOrOut2 == 1 ? "Inne" : "Ute");
+            var dailyAverages1 = Filhantering.GetDataAverage(InnOROutDel() == 1 ? "Inne" : "Ute");
             var SortedDataByTemp = (from d in dailyAverages1
                                     orderby d.AvgTemp descending
                                     select d).ToList();
@@ -49,9 +51,7 @@ namespace VäderData
 
         public static void DryestDay()
         {
-            Console.WriteLine("1 Inne eller 2 Ute: ");
-            int inOrOut3 = Helpers.GetValidIntegerMinMax(1, 2);
-            var dailyAverages2 = Filhantering.GetDataAverage(inOrOut3 == 1 ? "Inne" : "Ute");
+            var dailyAverages2 = Filhantering.GetDataAverage(InnOROutDel() == 1 ? "Inne" : "Ute");
             var SortedDataByHumidity = (from d in dailyAverages2
                                         orderby d.AvgHumidity
                                         select d).ToList();
@@ -63,9 +63,7 @@ namespace VäderData
 
         public static void MoldRisk()
         {
-            Console.WriteLine("1 Inne eller 2 Ute: ");
-            int inOrOut4 = Helpers.GetValidIntegerMinMax(1, 2);
-            var dailyAverages4 = Filhantering.GetDataAverage(inOrOut4 == 1 ? "Inne" : "Ute");
+            var dailyAverages4 = Filhantering.GetDataAverage(InnOROutDel() == 1 ? "Inne" : "Ute");
             var SortedDataByMoldRisk = (from d in dailyAverages4
                                         orderby d.MoldRisk
                                         select d).ToList();
