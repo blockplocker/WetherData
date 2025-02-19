@@ -32,5 +32,29 @@ namespace VäderData
             Console.WriteLine("tryck en valfri knapp för att fortsätta");
             Console.ReadKey();
         }
+        public static void PrintWithErrorHandling(string input)
+        {
+            try
+            {
+                Console.WriteLine(input);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            PressKeyToContinue();
+        }
+        public static void RunWithErrorHandling(MyDelegates.ActionDelegate action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            PressKeyToContinue();
+        }
     }
 }

@@ -62,6 +62,7 @@ namespace VäderData
 
                 sw.WriteLine("((luftfuktighet -78) * (Temp/15))/0,22");
             }
+            Console.WriteLine(" Filen skapad");
         }
 
     }

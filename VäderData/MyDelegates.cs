@@ -10,6 +10,7 @@ namespace VäderData
     {
         public delegate int MyDelegate();
 
+        public delegate void ActionDelegate();
         
     }
 }
